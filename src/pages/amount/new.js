@@ -117,6 +117,7 @@ export default function AmountFormPage() {
         key: client._id,
         text: client.name,
         value: client._id,
+        
       }
   })
   setArray(options)
