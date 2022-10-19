@@ -1,6 +1,7 @@
 import {Form, Grid, Button, Select, Dropdown} from "semantic-ui-react";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import AmountPage from ".";
 
 export default function AmountFormPage() {
 
@@ -101,7 +102,7 @@ export default function AmountFormPage() {
     const res = await fetch('http://localhost:3000/api/amounts/'+router.query.id);
     const data = await res.json();
     setAmount({
-      client: data.client,
+      client: data.client._id,
       name: data.client.name,
       monto: data.monto
     })
@@ -119,17 +120,14 @@ export default function AmountFormPage() {
       }
   })
   setArray(options)
-  console.log("op",options) 
   }
 
-  useEffect(() =>{
-    getAllClient()
-    
+  useEffect( () =>{
+       
     if(router.query.id){
-      console.log(router.query.id)
       getAmountId()
-    
     }
+    getAllClient()
   },[])
 
   return (
@@ -146,14 +144,16 @@ export default function AmountFormPage() {
             <div>
             
             <Dropdown
-        placeholder='Lesson type'
+        placeholder="Elige el cliente"
         search
         selection
         options={array}
-        defaultValue={amount.client._id}
+        value={amount.client}
+        name="client"
+        onChange={handleChange}
       />
             </div>
-            <Form.Input label="Client" name="client" onChange={handleChange} value={amount.client._id}/>
+            <Form.Input label="Client" name="client" onChange={handleChange} value={amount.name}/>
             <Form.Input label="Monto" name="monto" onChange={handleChange} value={amount.monto}/>
 
   
