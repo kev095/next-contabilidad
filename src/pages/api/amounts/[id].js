@@ -14,7 +14,7 @@ export default async (req, res) => {
     switch (method) {
         case "GET":
             try {
-                const amount = await Amount.findById(id);
+                const amount = await Amount.findById(id).populate("client");
                 if(!amount) return res.status(404).json({msg: "Amount no found."});
                 return res.status(200).json(amount);
             } catch (error) {

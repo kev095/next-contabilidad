@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 export default function AmountPage({amounts, error}) {
   
   const {query, push} = useRouter();
-
+/*
   if(amounts.length === 0) return(
     <Grid centered verticalAlign="middle" columns={1} style={{height: "80vh"}}>
       <Grid.Row>
@@ -16,7 +16,7 @@ export default function AmountPage({amounts, error}) {
       </Grid.Row>
     </Grid>
   )
-
+  */
   //Render a list of amounts
   return (
     <Container>
@@ -39,7 +39,6 @@ export default function AmountPage({amounts, error}) {
      
       </Table.Row>
     </Table.Header>
-
     <Table.Body>
         {amounts.map( (amount) => (
             <Table.Row key={amount._id}>
@@ -59,6 +58,7 @@ export default function AmountPage({amounts, error}) {
         }
 
     </Table.Body>
+
   </Table>
     </Container>
   )
@@ -66,21 +66,14 @@ export default function AmountPage({amounts, error}) {
 
 export const getServerSideProps = async (ctx) => {
   const res = await fetch("http://localhost:3000/api/amounts");
-  if(res.status === 200){
+  
+
     const amounts = await res.json();
     return{
       props: {
         amounts,
       }
     }
-  }
+  
 
-  return {
-    props: {
-      error: {
-        statusCode: res.status,
-        statusText: "Invalid id"
-      }
-    }
-  }
 }

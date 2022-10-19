@@ -9,6 +9,7 @@ export default async function handler(req, res){
         case "GET":
             try {
                 const amounts = await Amount.find().populate("client");
+               
                 return res.status(200).json(amounts);   
             } catch (error) {
                 return res.status(500).json({error: error.message});

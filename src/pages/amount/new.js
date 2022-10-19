@@ -1,8 +1,8 @@
-import {Form, Grid, Button, Select} from "semantic-ui-react";
+import {Form, Grid, Button, Select, Dropdown} from "semantic-ui-react";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
-export default function AmountFormPage({clients}) {
+export default function AmountFormPage() {
 
   const [amount, setAmount] = useState({
     document:"",
@@ -18,8 +18,25 @@ export default function AmountFormPage({clients}) {
     description:""
   });
 
+  const [array, setArray] = useState([])
+
   const router = useRouter();
 
+  const lessonGroup = [
+    { key: 'r', value: 'regular', text: 'Regular lesson' },
+    { key: 'wp', value: 'wp', text: 'Weak Point lesson' },
+    { key: 'wt', value: 'wt', text: 'World Tour lesson' },
+  ]
+  
+  /*  
+  const options = clients.map(client => {
+      return {
+        key: client._id,
+        text: client.name,
+        value: client.i_id,
+      }
+  })
+*/
   const validate = () => {
     const errors = {}
 
@@ -85,15 +102,33 @@ export default function AmountFormPage({clients}) {
     const data = await res.json();
     setAmount({
       client: data.client,
+      name: data.client.name,
       monto: data.monto
     })
+   
+  }
 
+  const getAllClient = async () => {
+    const res = await fetch("http://localhost:3000/api/clients");
+    const data = await res.json();
+    const options = data.map(client => {
+      return {
+        key: client._id,
+        text: client.name,
+        value: client._id,
+      }
+  })
+  setArray(options)
+  console.log("op",options) 
   }
 
   useEffect(() =>{
+    getAllClient()
+    
     if(router.query.id){
       console.log(router.query.id)
       getAmountId()
+    
     }
   },[])
 
@@ -109,11 +144,16 @@ export default function AmountFormPage({clients}) {
           <h1>{router.query.id ? 'Update Monto' : 'Create Monto'}</h1>
           <Form  onSubmit={handleSubmit}>
             <div>
-     
-            <Select placeholder='Select your country' />
-
+            
+            <Dropdown
+        placeholder='Lesson type'
+        search
+        selection
+        options={array}
+        defaultValue={amount.client._id}
+      />
             </div>
-            <Form.Input label="Client" name="client" onChange={handleChange} value={amount.client}/>
+            <Form.Input label="Client" name="client" onChange={handleChange} value={amount.client._id}/>
             <Form.Input label="Monto" name="monto" onChange={handleChange} value={amount.monto}/>
 
   
@@ -128,11 +168,15 @@ export default function AmountFormPage({clients}) {
 
 }
 export const getServerSideProps = async (ctx) => {
-    const res = await fetch("http://localhost:3000/api/clients");
+  const res = await fetch("http://localhost:3000/api/clients");
+  
+
     const clients = await res.json();
     return{
-        props: {
-          clients,
-        }
+      props: {
+        clients,
+      }
     }
-  }
+  
+
+}
