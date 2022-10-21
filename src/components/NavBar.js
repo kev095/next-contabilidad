@@ -15,7 +15,7 @@ export const Navbar = () => {
                     </Link>
                 </Menu.Item>
                 <Menu.Item>
-                <h5>Estudio Farfán</h5>
+                <h5>Estudio Farfán - </h5>
                 </Menu.Item>
                 <Menu.Menu position="right">
                     <Menu.Item >
