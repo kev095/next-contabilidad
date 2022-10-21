@@ -52,7 +52,7 @@ export default function ClientFormPage() {
 
   const createClient = async() => {
     try {
-      await fetch('http://localhost:3000/api/clients', {
+      await fetch('https://next-contabilidad-wpp.herokuapp.com/api/clients', {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"
@@ -66,7 +66,7 @@ export default function ClientFormPage() {
 
   const updateClient = async () => {
     try {
-      await fetch('http://localhost:3000/api/clients/'+router.query.id,{
+      await fetch('https://next-contabilidad-wpp.herokuapp.com/api/clients/'+router.query.id,{
         method: 'PUT',
         headers: {
           "Content-Type": "application/json"
@@ -83,7 +83,7 @@ export default function ClientFormPage() {
   }
 
   const getClientId = async () => {
-    const res = await fetch('http://localhost:3000/api/clients/'+router.query.id);
+    const res = await fetch('https://next-contabilidad-wpp.herokuapp.com/api/clients/'+router.query.id);
     const data = await res.json();
     setClient({
       document: data.document,

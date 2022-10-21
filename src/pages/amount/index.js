@@ -62,7 +62,7 @@ export default function AmountPage({amounts, error}) {
 }
 
 export const getServerSideProps = async (ctx) => {
-  const res = await fetch("http://localhost:3000/api/amounts");
+  const res = await fetch("https://next-contabilidad-wpp.herokuapp.com/api/amounts");
   
 
     const amounts = await res.json();

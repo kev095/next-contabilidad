@@ -67,7 +67,7 @@ export default function ClientPage({clients, error}) {
 }
 
 export const getServerSideProps = async (ctx) => {
-  const res = await fetch("http://localhost:3000/api/clients");
+  const res = await fetch("https://next-contabilidad-wpp.herokuapp.com/api/clients");
   if(res.status === 200){
     const clients = await res.json();
     return{

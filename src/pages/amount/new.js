@@ -68,7 +68,7 @@ export default function AmountFormPage() {
   const createAmount = async() => {
     console.log(amount);
     try {
-      await fetch('http://localhost:3000/api/amounts', {
+      await fetch('https://next-contabilidad-wpp.herokuapp.com/api/amounts', {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"
@@ -82,7 +82,7 @@ export default function AmountFormPage() {
 
   const updateAmount = async () => {
     try {
-      await fetch('http://localhost:3000/api/amounts/'+router.query.id,{
+      await fetch('https://next-contabilidad-wpp.herokuapp.com/api/amounts/'+router.query.id,{
         method: 'PUT',
         headers: {
           "Content-Type": "application/json"
@@ -100,7 +100,7 @@ export default function AmountFormPage() {
   }
 
   const getAmountId = async () => {
-    const res = await fetch('http://localhost:3000/api/amounts/'+router.query.id);
+    const res = await fetch('https://next-contabilidad-wpp.herokuapp.com/api/amounts/'+router.query.id);
     const data = await res.json();
     setAmount({
       client: data.client._id,
@@ -111,7 +111,7 @@ export default function AmountFormPage() {
   }
 
   const getAllClient = async () => {
-    const res = await fetch("http://localhost:3000/api/clients");
+    const res = await fetch("https://next-contabilidad-wpp.herokuapp.com/api/clients");
     const data = await res.json();
     const options = data.map(client => {
       return {
@@ -175,7 +175,7 @@ export default function AmountFormPage() {
 
 }
 export const getServerSideProps = async (ctx) => {
-  const res = await fetch("http://localhost:3000/api/clients");
+  const res = await fetch("https://next-contabilidad-wpp.herokuapp.com/api/clients");
   
 
     const clients = await res.json();

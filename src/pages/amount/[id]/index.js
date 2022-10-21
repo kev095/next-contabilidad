@@ -17,7 +17,7 @@ export default function AmountDetail({amount}) {
   const deleteAmount = async () =>{
     const {id} = query;
     try {
-      await fetch(`http://localhost:3000/api/amounts/${id}`,{
+      await fetch(`https://next-contabilidad-wpp.herokuapp.com/api/amounts/${id}`,{
         method: "DELETE",
       })
     } catch (error) {
@@ -58,7 +58,7 @@ export default function AmountDetail({amount}) {
 }
 
 export async function getServerSideProps({query: {id}}){
-  const res = await fetch(`http://localhost:3000/api/amounts/${id}`)
+  const res = await fetch(`https://next-contabilidad-wpp.herokuapp.com/api/amounts/${id}`)
 
   if(res.status === 200){
     const amount = await res.json()
