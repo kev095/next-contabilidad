@@ -96,6 +96,7 @@ export default function AmountFormPage() {
 
   const handleChange= (e) => {
     setAmount({...amount,[e.target.name]: e.target.value}); 
+    console.log(amount)
   }
 
   const getAmountId = async () => {
@@ -117,7 +118,7 @@ export default function AmountFormPage() {
         key: client._id,
         text: client.name,
         value: client._id,
-        
+
       }
   })
   setArray(options)
@@ -145,16 +146,21 @@ export default function AmountFormPage() {
             <div>
             
             <Dropdown
+                    onChange={(e, data) => {setAmount({...amount,client: data.value}
+
+                      )
+                      console.log(amount)}}
         placeholder="Elige el cliente"
         search
         selection
         options={array}
+
         value={amount.client}
         name="client"
-        onChange={handleChange}
+
       />
             </div>
-            <Form.Input label="Client" name="client" onChange={handleChange} value={amount.name}/>
+            <Form.Input label="Client" name="client" onChange={handleChange} value={amount.client}/>
             <Form.Input label="Monto" name="monto" onChange={handleChange} value={amount.monto}/>
 
   
