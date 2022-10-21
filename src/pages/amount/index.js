@@ -31,8 +31,7 @@ export default function AmountPage({amounts, error}) {
     <Table.Header>
       <Table.Row>
         <Table.HeaderCell>N° Documento</Table.HeaderCell>
-        <Table.HeaderCell>Nombre</Table.HeaderCell>
-        <Table.HeaderCell>Apellidos</Table.HeaderCell>
+
         <Table.HeaderCell>Razón Social</Table.HeaderCell>
         <Table.HeaderCell>Monto</Table.HeaderCell>
         <Table.HeaderCell>Opción</Table.HeaderCell>
@@ -43,8 +42,6 @@ export default function AmountPage({amounts, error}) {
         {amounts.map( (amount) => (
             <Table.Row key={amount._id}>
                 <Table.Cell>{amount.client.document}</Table.Cell>
-                <Table.Cell>{amount.client.name}</Table.Cell>
-                <Table.Cell>{amount.client.lastname}</Table.Cell>
                 <Table.Cell>{amount.client.business_name}</Table.Cell>
                 <Table.Cell>{amount.monto}</Table.Cell>
                 <Table.Cell>
